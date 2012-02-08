@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>Create Template</title>
+    <link rel="stylesheet" type="text/css" href="$link.relative('css/dbtcard.css')" 
+        media="all"/>
+</head>
+<body>
+<h2>Daily Targets</h2>
+<p>Please add targets to the three cateogries below.</p>
+<form method="post" action="template.targets.logic">
+rangeMax
+categoryID
+target
+description
+</form>
+<h3>Feelings</h3>
+#if( $feelings )
+    #foreach( $f in $feelings)
+        <p>$f</p>
+    #end
+#end
+<table border="0" cellpadding="3" cellspacing="3">
+<tbody>
+<tr>
+    <td><label>Template Name:</label></td>
+    <td><input type="text" name="template.name"/>
+</tr>
+<tr>
+    <td colspan="2" align="right">
+        <input type="submit" value="Next"/>
+    </td>
+</tr>
+</table>
+</body>
+</html>

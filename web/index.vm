@@ -1,11 +1,20 @@
 <html>
 <head>
 <title>Works</title>
+    <link rel="stylesheet" type="text/css" href="$link.relative('css/dbtcard.css')" 
+        media="all"/>
 </head>
 <body>
 #set( $h = "Hello" )
 
 <h1>$h</h1>
 
+<fieldset>
+<legend>Card Templates</legend>
+<a href="template.form.logic">New Template</a>
+</fieldset>
+<br/><br/>
+<a href="target.view.logic?id=2">View Target with ID of 2</a><br/>
+<a href="target.cattargets.logic?id=7">View Targets in category Feelings</a><br/>
 </body>
 </html>

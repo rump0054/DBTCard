@@ -1,0 +1,10 @@
+<html>
+<head>
+<title>View</title>
+</head>
+<body>
+#foreach( $t in $targets )
+<p>$t</p>
+#end
+</body>
+</html>

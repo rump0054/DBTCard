@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>Create Template</title>
+<link type="text/css" href="css/start/jquery-ui-1.8.17.custom.css" rel="stylesheet" />
+<!--link rel="stylesheet" type="text/css" href="$link.relative('css/dbtcard.css')"/-->	
+
+<script type="text/javascript" src="scripts/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="scripts/jquery-ui-1.8.17.custom.min.js"></script>
+</head>
+<body>
+<div id="wrapper">
+<table cellpadding="3" cellspacing="3" border="1">
+<tr>
+    <th width="175px">Feelings</th>
+    <th width="5px">&nbsp;</th>
+    <th width="175px">Thoughts</th>
+    <th width="5px">&nbsp;</th>
+    <th width="175px">Behaviors</th>
+</tr>
+<tr>
+    <td><label>Add new Target</label><div style="float:right">
+        <a href="target.feelings.logic">Add</a></div></td>
+    <td></td>
+    <td>Add new Thought<div style="float:right">Add</div></td>
+    <td></td>
+    <td>Add new Behavior<div style="float:right">Add</div></td>
+</tr>
+</table>
+</div>
+</body>
+</html>

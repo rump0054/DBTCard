@@ -1,0 +1,17 @@
+<html>
+<head>
+<title>Create Template</title>
+<!--link type="text/css" href="css/start/jquery-ui-1.8.17.custom.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="$link.relative('css/dbtcard.css')"/>	
+
+<script type="text/javascript" src="scripts/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="scripts/jquery-ui-1.8.17.custom.min.js"></script-->
+</head>
+<body>
+<div id="wrapper">
+#foreach( $f in $targets )
+    <p>$f.target</p>
+#end
+</div>
+</body>
+</html>
