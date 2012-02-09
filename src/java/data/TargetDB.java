@@ -12,16 +12,17 @@ import java.util.ArrayList;
 public class TargetDB {
 
     protected int maxRows;
-    protected final String SQL_SELECT = "SELECT targetID, rangeMax, categoryID, target, description FROM c_target";
-    protected final String SQL_INSERT = "INSERT INTO c_target ( rangeMax, categoryID, target, description ) VALUES ( ?, ?, ?, ? )";
-    protected final String SQL_UPDATE = "UPDATE c_target SET targetID = ?, rangeMax = ?, categoryID = ?, target = ?, description = ? WHERE targetID = ?";
+    protected final String SQL_SELECT = "SELECT targetID, rangeMax, categoryID, target, description, username FROM c_target";
+    protected final String SQL_INSERT = "INSERT INTO c_target ( rangeMax, categoryID, target, description, username ) VALUES ( ?, ?, ?, ?, ? )";
+    protected final String SQL_UPDATE = "UPDATE c_target SET targetID = ?, rangeMax = ?, categoryID = ?, target = ?, description = ?, username = ? WHERE targetID = ?";
     protected final String SQL_DELETE = "DELETE FROM c_target WHERE targetID = ?";
     protected static final int COLUMN_TARGET_I_D = 1;
     protected static final int COLUMN_RANGE_MAX = 2;
     protected static final int COLUMN_CATEGORY_I_D = 3;
     protected static final int COLUMN_TARGET = 4;
     protected static final int COLUMN_DESCRIPTION = 5;
-    protected static final int NUMBER_OF_COLUMNS = 5;
+    protected static final int COLUMN_USERNAME = 6;
+    protected static final int NUMBER_OF_COLUMNS = 6;
     protected static final int PK_COLUMN_TARGET_I_D = 1;
 
     public Target insert(Target target) {
@@ -38,6 +39,7 @@ public class TargetDB {
             ps.setLong(index++, target.getCategoryID());
             ps.setString(index++, target.getTarget());
             ps.setString(index++, target.getDescription());
+            ps.setString(index++, target.getUsername());
 
             int rows = ps.executeUpdate();
 
@@ -76,6 +78,7 @@ public class TargetDB {
             ps.setLong(index++, target.getCategoryID());
             ps.setString(index++, target.getTarget());
             ps.setString(index++, target.getDescription());
+            ps.setString(index++, target.getUsername());
             ps.setLong(6, target.getTargetID());
 
             int rows = ps.executeUpdate();
@@ -145,6 +148,7 @@ public class TargetDB {
                 target.setCategoryID(rs.getLong(COLUMN_CATEGORY_I_D));
                 target.setTarget(rs.getString(COLUMN_TARGET));
                 target.setDescription(rs.getString(COLUMN_DESCRIPTION));
+                target.setUsername(rs.getString(COLUMN_USERNAME));
             }
 
             rs.close();
@@ -175,6 +179,15 @@ public class TargetDB {
                 new Object[]{new Long(categoryID)});
     }
 
+        /**
+     * Returns all rows from the c_target table that match the criteria
+     * 'categoryID = :categoryID'.
+     */
+    public ArrayList<Target> getTargetsByCategory(long categoryID, String owner) {
+        return findByDynamicSelect(SQL_SELECT + " WHERE categoryID = ? AND (username = ? OR username = ?) ORDER BY target ASC",
+                new Object[]{new Long(categoryID), owner, "system"});
+    }
+    
     /**
      * Fetches a single row from the result set
      */
@@ -211,6 +224,7 @@ public class TargetDB {
         target.setCategoryID(rs.getLong(COLUMN_CATEGORY_I_D));
         target.setTarget(rs.getString(COLUMN_TARGET));
         target.setDescription(rs.getString(COLUMN_DESCRIPTION));
+        target.setUsername(rs.getString(COLUMN_USERNAME));
     }
 
     /**

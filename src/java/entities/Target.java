@@ -22,6 +22,8 @@ public class Target{
      * This attribute maps to the column description in the c_target table.
      */
     protected String description;
+    
+    protected String username;
 
     /**
      * Method 'Target'
@@ -120,6 +122,16 @@ public class Target{
         this.description = description;
     }
 
+    public String getUsername()
+    {
+        return username;
+    }
+
+    public void setUsername(String username)
+    {
+        this.username = username;
+    }
+
     /**
      * Method 'equals'
      *
@@ -176,6 +188,7 @@ public class Target{
         ret.append(", categoryID=" + categoryID);
         ret.append(", target=" + target);
         ret.append(", description=" + description);
+        ret.append(", username=" + username);
         return ret.toString();
     }
 }

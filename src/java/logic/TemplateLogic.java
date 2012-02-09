@@ -23,13 +23,21 @@ public class TemplateLogic
     private Template template;
     
     @Out
-    private ArrayList<Target> feelings;
+    private ArrayList<Target> feelings, thoughts, behaviors;
     
     public void form()
     {
+        String username = "erumppe";
+        
         TargetDB db = new TargetDB();
         feelings = new ArrayList<Target>();
-        feelings = db.findAll();
+        thoughts = new ArrayList<Target>();
+        behaviors = new ArrayList<Target>();
+        
+        feelings = db.getTargetsByCategory(7, username);
+        thoughts = db.getTargetsByCategory(6, username);
+        behaviors = db.getTargetsByCategory(5, username);
+        
     }
     
     public void create(Template t)

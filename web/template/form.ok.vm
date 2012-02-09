@@ -2,30 +2,138 @@
 <head>
 <title>Create Template</title>
 <link type="text/css" href="css/start/jquery-ui-1.8.17.custom.css" rel="stylesheet" />
-<!--link rel="stylesheet" type="text/css" href="$link.relative('css/dbtcard.css')"/-->	
+<link rel="stylesheet" type="text/css" href="$link.relative('css/dbtcard.css')"/>	
 
 <script type="text/javascript" src="scripts/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="scripts/jquery-ui-1.8.17.custom.min.js"></script>
+<script>
+jQuery.noConflict();
+
+$(document).ready(function() {
+    var feel = '';
+    #foreach( $f in $feelings )
+        feel += "$f\n";
+    #end
+    
+    alert(feel);
+});
+</script>
+<style>
+h3 {
+    margin-bottom: 0px;
+}
+</style>
 </head>
 <body>
+#set( $feelings = $targets.get(0) )
+#set( $thoughts = $targets.get(1) )
+#set( $behaviors = $targets.get(2) )
 <div id="wrapper">
-<table cellpadding="3" cellspacing="3" border="1">
-<tr>
-    <th width="175px">Feelings</th>
-    <th width="5px">&nbsp;</th>
-    <th width="175px">Thoughts</th>
-    <th width="5px">&nbsp;</th>
-    <th width="175px">Behaviors</th>
-</tr>
-<tr>
-    <td><label>Add new Target</label><div style="float:right">
-        <a href="target.feelings.logic">Add</a></div></td>
-    <td></td>
-    <td>Add new Thought<div style="float:right">Add</div></td>
-    <td></td>
-    <td>Add new Behavior<div style="float:right">Add</div></td>
-</tr>
-</table>
+    
+    <div id="feelings" style="width:300px; float:left">
+        <h3 class="ui-widget-header">Feelings</h3>
+        <div class="ui-widget-content">
+            <ul style="list-style-type:none">
+                <li class="placeholder">Drop targeted feelings here</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="defined" style="width:200px; float: left; margin-left: 10px">
+        <h3 class="ui-widget-header">User Defined</h3>
+        <div class="ui-widget-content">
+            <span style="margin-left: 20px"><a href="#">Add New</a></span>
+            <ul style="list-style-type:none">
+            #foreach( $f in $feelings )
+            #if( $f.username ne 'system' )
+            <li class="drag-feeling">$f.target</li>
+            #end
+            #end
+            </ul>
+        </div>
+ 
+        <h3 class="ui-widget-header">System Defined</h3>
+        <div class="ui-widget-content">
+            <ul style="list-style-type:none">
+            #foreach( $f in $feelings )
+            #if( $f.username eq 'system' )
+                <li class="drag-feeling">$f.target</li>
+            #end
+            #end
+            </ul>
+        </div>
+    </div>
+
+    <br/>
+   <div id="thoughts" style="width:300px; float:left">
+        <h3 class="ui-widget-header">Thoughts</h3>
+        <div class="ui-widget-content">
+            <ul style="list-style-type:none">
+                <li class="placeholder">Drop targeted thoughts here</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="defined" style="width:200px; float: left; margin-left: 10px">
+        <h3 class="ui-widget-header">User Defined</h3>
+        <div class="ui-widget-content">
+            <span style="margin-left: 20px"><a href="#">Add New</a></span>
+            <ul style="list-style-type:none">
+            #foreach( $t in $thoughts )
+            #if( $t.username ne 'system' )
+            <li class="drag-thought">$t.target</li>
+            #end
+            #end
+            </ul>
+        </div>
+ 
+        <h3 class="ui-widget-header">System Defined</h3>
+        <div class="ui-widget-content">
+            <ul style="list-style-type:none">
+            #foreach( $t in $thoughts )
+            #if( $t.username eq 'system' )
+                <li class="drag-thought">$t.target</li>
+            #end
+            #end
+            </ul>
+        </div>
+    </div>
+    
+    <br/>
+
+   <div id="behaviors" style="width:300px; float:left">
+        <h3 class="ui-widget-header">Behaviors</h3>
+        <div class="ui-widget-content">
+            <ul style="list-style-type:none">
+                <li class="placeholder">Drop targeted behaviors here</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="defined" style="width:200px; float: left; margin-left: 10px">
+        <h3 class="ui-widget-header">User Defined</h3>
+        <div class="ui-widget-content">
+            <span style="margin-left: 20px"><a href="#">Add New</a></span>
+            <ul style="list-style-type:none">
+            #foreach( $b in $behaviors )
+            #if( $b.username ne 'system' )
+            <li class="drag-behavior">$b.target</li>
+            #end
+            #end
+            </ul>
+        </div>
+ 
+        <h3 class="ui-widget-header">System Defined</h3>
+        <div class="ui-widget-content">
+            <ul style="list-style-type:none">
+            #foreach( $b in $behaviors )
+            #if( $b.username eq 'system' )
+                <li class="drag-behavior">$b.target</li>
+            #end
+            #end
+            </ul>
+        </div>
+    </div>
 </div>
 </body>
 </html>
