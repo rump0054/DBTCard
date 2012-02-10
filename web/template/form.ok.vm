@@ -11,118 +11,72 @@
 h3 {
     margin-bottom: 0px;
 }
+
+table {
+    font-size: 1em;
+}
+
+h3 {
+    padding-left: 5;
+    font-size: 1.3em;
+}
 </style>
 </head>
 <body>
+<form method="post" action="template.create.logic">
 #set( $feelings = $targets.get(0) )
 #set( $thoughts = $targets.get(1) )
 #set( $behaviors = $targets.get(2) )
 <div id="wrapper">
-    
-    <div id="feelings" style="width:300px; float:left">
+    <p>Template Description:&nbsp;&nbsp;<input type="text" name="cardname"/></p>
+    <div id="feelings" style="width:225px; float:left">
         <h3 class="ui-widget-header">Feelings</h3>
         <div class="ui-widget-content">
-            <ul style="list-style-type:none">
-                <li class="placeholder">Drop targeted feelings here</li>
-            </ul>
+        <table border="0" cellpadding="3" cellspacing="3" width="100%">
+        #foreach( $f in $feelings )
+        <tr>
+            <td>$f.target</td>
+            <td align="right">
+                <input type="checkbox" name="id" value="$f.targetID" />
+            </td>
+        </tr>
+        #end
+        </table>
         </div>
     </div>
 
-    <div id="defined" style="width:200px; float: left; margin-left: 10px">
-        <h3 class="ui-widget-header">User Defined</h3>
-        <div class="ui-widget-content">
-            <span style="margin-left: 20px"><a href="#">Add New</a></span>
-            <ul style="list-style-type:none">
-            #foreach( $f in $feelings )
-            #if( $f.username ne 'system' )
-            <li class="drag-feeling">$f.target</li>
-            #end
-            #end
-            </ul>
-        </div>
- 
-        <h3 class="ui-widget-header">System Defined</h3>
-        <div class="ui-widget-content">
-            <ul style="list-style-type:none">
-            #foreach( $f in $feelings )
-            #if( $f.username eq 'system' )
-                <li class="drag-feeling">$f.target</li>
-            #end
-            #end
-            </ul>
-        </div>
-    </div>
-
-    <br/>
-   <div id="thoughts" style="width:300px; float:left">
+   <div id="thoughts" style="width:225px; float:left; margin-left: 10px">
         <h3 class="ui-widget-header">Thoughts</h3>
         <div class="ui-widget-content">
-            <ul style="list-style-type:none">
-                <li class="placeholder">Drop targeted thoughts here</li>
-            </ul>
+        <table border="0" cellpadding="3" cellspacing="3" width="100%">
+        #foreach( $t in $thoughts )
+        <tr>
+            <td>$t.target</td>
+            <td align="right">
+                <input type="checkbox" name="ids" value="$t.targetID" />
+            </td>
+        </tr>
+        #end
+        </table>
         </div>
     </div>
 
-    <div id="defined" style="width:200px; float: left; margin-left: 10px">
-        <h3 class="ui-widget-header">User Defined</h3>
-        <div class="ui-widget-content">
-            <span style="margin-left: 20px"><a href="#">Add New</a></span>
-            <ul style="list-style-type:none">
-            #foreach( $t in $thoughts )
-            #if( $t.username ne 'system' )
-            <li class="drag-thought">$t.target</li>
-            #end
-            #end
-            </ul>
-        </div>
- 
-        <h3 class="ui-widget-header">System Defined</h3>
-        <div class="ui-widget-content">
-            <ul style="list-style-type:none">
-            #foreach( $t in $thoughts )
-            #if( $t.username eq 'system' )
-                <li class="drag-thought">$t.target</li>
-            #end
-            #end
-            </ul>
-        </div>
-    </div>
-    
-    <br/>
-
-   <div id="behaviors" style="width:300px; float:left">
+   <div id="behaviors" style="width:225; float:left; margin-left:10px">
         <h3 class="ui-widget-header">Behaviors</h3>
         <div class="ui-widget-content">
-            <ul style="list-style-type:none">
-                <li class="placeholder">Drop targeted behaviors here</li>
-            </ul>
-        </div>
-    </div>
-
-    <div id="defined" style="width:200px; float: left; margin-left: 10px">
-        <h3 class="ui-widget-header">User Defined</h3>
-        <div class="ui-widget-content">
-            <span style="margin-left: 20px"><a href="#">Add New</a></span>
-            <ul style="list-style-type:none">
-            #foreach( $b in $behaviors )
-            #if( $b.username ne 'system' )
-            <li class="drag-behavior">$b.target</li>
-            #end
-            #end
-            </ul>
-        </div>
- 
-        <h3 class="ui-widget-header">System Defined</h3>
-        <div class="ui-widget-content">
-            <ul style="list-style-type:none">
-            #foreach( $b in $behaviors )
-            #if( $b.username eq 'system' )
-                <li class="drag-behavior">$b.target</li>
-            #end
-            #end
-            </ul>
+        <table border="0" cellpadding="3" cellspacing="3" width="100%">
+        #foreach( $b in $behaviors )
+        <tr>
+            <td>$b.target</td>
+            <td align="right">
+                <input type="checkbox" name="ids" value="$b.targetID" />
+            </td>
+        </tr>
+        #end
+        </table>
         </div>
     </div>
 </div>
+</form>
 </body>
 </html>
