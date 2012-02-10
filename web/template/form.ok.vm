@@ -6,18 +6,7 @@
 
 <script type="text/javascript" src="scripts/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="scripts/jquery-ui-1.8.17.custom.min.js"></script>
-<script>
-jQuery.noConflict();
-
-$(document).ready(function() {
-    var feel = '';
-    #foreach( $f in $feelings )
-        feel += "$f\n";
-    #end
-    
-    alert(feel);
-});
-</script>
+<script type="text/javascript" src="scripts/template-interface.js"></script>
 <style>
 h3 {
     margin-bottom: 0px;
