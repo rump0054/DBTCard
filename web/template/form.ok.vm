@@ -6,21 +6,15 @@
 
 <script type="text/javascript" src="scripts/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="scripts/jquery-ui-1.8.17.custom.min.js"></script>
-<script type="text/javascript" src="scripts/template-interface.js"></script>
-<style>
-h3 {
-    margin-bottom: 0px;
-}
-
-table {
-    font-size: 1em;
-}
-
-h3 {
-    padding-left: 5;
-    font-size: 1.3em;
-}
-</style>
+<script>
+$(document).ready(function() {
+    $('#accordion').accordion({
+        autoHeight: false,
+        navigation: true,
+        collapsible: true
+    });
+});
+</script>
 </head>
 <body>
 <form method="post" action="template.create.logic">
@@ -28,54 +22,76 @@ h3 {
 #set( $thoughts = $targets.get(1) )
 #set( $behaviors = $targets.get(2) )
 <div id="wrapper">
-    <p>Template Description:&nbsp;&nbsp;<input type="text" name="cardname"/></p>
-    <div id="feelings" style="width:225px; float:left">
-        <h3 class="ui-widget-header">Feelings</h3>
-        <div class="ui-widget-content">
-        <table border="0" cellpadding="3" cellspacing="3" width="100%">
-        #foreach( $f in $feelings )
-        <tr>
-            <td>$f.target</td>
-            <td align="right">
-                <input type="checkbox" name="id" value="$f.targetID" />
-            </td>
-        </tr>
-        #end
-        </table>
+<div style="width:400px; margin:0 auto">
+<h1>Diary Card Template</h1>
+<p style="width:400px">Please use the options below to create a diary card template.
+You can add additional targets to each group by clicking the "Add Target" link 
+and submitting the form.</p>
+<table border="0" cellpadding="3" cellspacing="3" width="400px">
+    <tr>
+        <td><label>Description:</label></td>
+        <td><input type="text" name="cardname" size="46"/></td>
+    </tr>
+</table>
+    <div id="accordion" style="width:400px">
+        <h3><a href="${esc.h}section1">Feelings</a></h3>
+        <div>
+            <span style="float:right">
+                <a href="#">Add new target feeling</a>
+            </span>
+            <table border="0" cellpadding="3" cellspacing="3" width="100%">
+            #foreach( $f in $feelings )
+            <tr>
+                <td>$f.target</td>
+                <td align="right">
+                    <input type="checkbox" name="id" value="$f.targetID" />
+                </td>
+            </tr>
+            #end
+            </table>
         </div>
-    </div>
+   
+        <h3><a href="${esc.h}section2">Thoughts</a></h3>
+        <div>
+            <span style="float:right">
+                <a href="#">Add new target thought</a>
+            </span>
+            <table border="0" cellpadding="3" cellspacing="3" width="100%">
+            #foreach( $t in $thoughts )
+            <tr>
+                <td>$t.target</td>
+                <td align="right">
+                    <input type="checkbox" name="ids" value="$t.targetID" />
+                </td>
+            </tr>
+            #end
+            </table>
+        </div>
 
-   <div id="thoughts" style="width:225px; float:left; margin-left: 10px">
-        <h3 class="ui-widget-header">Thoughts</h3>
-        <div class="ui-widget-content">
-        <table border="0" cellpadding="3" cellspacing="3" width="100%">
-        #foreach( $t in $thoughts )
-        <tr>
-            <td>$t.target</td>
-            <td align="right">
-                <input type="checkbox" name="ids" value="$t.targetID" />
-            </td>
-        </tr>
-        #end
-        </table>
+        <h3><a href="${esc.h}section3">Behaviors</a></h3>
+            <div>
+            <span style="float:right">
+                <a href="#">Add new target behavior</a>
+            </span>
+            <table border="0" cellpadding="3" cellspacing="3" width="100%">
+            #foreach( $b in $behaviors )
+            <tr>
+                <td>$b.target</td>
+                <td align="right">
+                    <input type="checkbox" name="ids" value="$b.targetID" />
+                </td>
+            </tr>
+            #end
+            </table>
         </div>
-    </div>
-
-   <div id="behaviors" style="width:225; float:left; margin-left:10px">
-        <h3 class="ui-widget-header">Behaviors</h3>
-        <div class="ui-widget-content">
-        <table border="0" cellpadding="3" cellspacing="3" width="100%">
-        #foreach( $b in $behaviors )
-        <tr>
-            <td>$b.target</td>
-            <td align="right">
-                <input type="checkbox" name="ids" value="$b.targetID" />
-            </td>
-        </tr>
-        #end
-        </table>
-        </div>
-    </div>
+</div>
+<table border="0" cellpadding="3" cellspacing="3" width="400px">
+    <tr>
+        <td colspan="2" align="right">
+            <input type="submit" value="Save"/>
+        </td>
+    </tr>
+</table>
 </div>
 </form>
 </body>

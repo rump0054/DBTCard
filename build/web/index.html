@@ -1,0 +1,76 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>New Web Project</title>
+
+<script type="text/javascript" src="scripts/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="scripts/jquery-ui-1.8.17.custom.min.js"></script>
+<script>
+$( init );
+
+function init() {
+    $('#thoughtPile').html('');
+    $('#thoughtSlots').html('');
+
+    $.getJSON("card.targets.ajax.logic", function(data)
+    {
+        $.each(data.targets, function(i, val) 
+        {
+            $('<div>' + val.target + '</div>')
+                .data({
+                    'id':val.targetID,
+                    'range':val.rangeMax,
+                    'description':val.description,
+                    'target':val.target,
+                    'category':val.categoryID
+                })
+                .attr('id', val.targetID)
+                .appendTo('#thoughtPile')
+                .draggable({
+                    containment: '#content',
+                    appendTo: '#thoughtSlots',
+                    cursor: 'move',
+                    revert: true
+                })
+        })
+    });
+
+    $('#thoughtSlots').droppable({
+        accept: '#thoughtPile div',
+        hoverClass: 'hovered',
+        drop: function(event, ui){
+            $(this).addClass("ui-state-highlight");
+        }
+    });
+}
+</script>
+<style>
+#thoughPile {
+    float: left;
+}
+
+#thoughPile div {
+    width: 100px;
+    height: 100px;
+    padding: 0.5em;
+    float: left;
+    margin: 10px 10px 10px 0;
+}
+
+#thoughtSlots {
+    width: 150px;
+    height: 150px; 
+    padding: 0.5em; 
+    float: left; 
+    margin: 10px;
+    border: 1px solid black;
+}
+</style>
+</head>
+<body>
+    <h1>New Web Project Page</h1>
+    <div id="content">
+        <div id="thoughtPile"></div>
+        <div id="thoughtSlots"></div>
+    </div>
+</body>
+</html>

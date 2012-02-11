@@ -1,29 +1,27 @@
 package logic;
 
-import java.util.ArrayList;
 
 import org.vraptor.annotations.Component;
 import org.vraptor.annotations.Out;
-import org.vraptor.annotations.Parameter;
-
-import data.CategoryDB;
 import data.TargetDB;
-import data.TemplateDB;
-import data.TemplateTargetDB;
-
-import entities.Category;
 import entities.Target;
-import entities.Template;
-import entities.TemplateTarget;
+import java.util.ArrayList;
+import org.vraptor.annotations.Remotable;
 
 @Component("template")
 public class TemplateLogic
 {    
-    @Out
-    private Template template;
+    /*@Out
+    private Template template;*/
     
     @Out
     private ArrayList<Target> feelings, thoughts, behaviors;
+    
+    @Out
+    private ArrayList<Target> targets;
+    
+    /*@Out
+    private List<Target> targets;*/
     
     public void form()
     {
@@ -39,8 +37,26 @@ public class TemplateLogic
         behaviors = db.getTargetsByCategory(5, username);
         
     }
+ 
+    @Remotable
+     public void targets()
+    {
+        String username = "erumppe";
+        
+        TargetDB db = new TargetDB();
+        //targets = new ArrayList<ArrayList<Target>>();
+        feelings = new ArrayList<Target>();
+        thoughts = new ArrayList<Target>();
+        behaviors = new ArrayList<Target>();
+        
+        feelings = db.getTargetsByCategory(7, username);
+        thoughts = db.getTargetsByCategory(6, username);
+        behaviors = db.getTargetsByCategory(5, username);
+        
+        targets = db.findAll();
+    }
     
-    public void create(Template t)
+    /*public void create(Template t)
     {
         t.setUid("erumppe");
         
@@ -51,5 +67,5 @@ public class TemplateLogic
     public void addTargets(Target target)
     {
         TargetDB db = new TargetDB();
-    }
+    }*/
 }
