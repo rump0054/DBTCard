@@ -1,7 +1,9 @@
 package entities;
 
-public class Template
-{
+import java.util.ArrayList;
+
+public class Template {
+
     /**
      * This attribute maps to the column templateID in the c_template table.
      */
@@ -14,13 +16,13 @@ public class Template
      * This attribute maps to the column uid in the c_template table.
      */
     protected String uid;
+    protected ArrayList<Target> targets;
 
     /**
      * Method 'Template'
      *
      */
-    public Template()
-    {
+    public Template() {
     }
 
     /**
@@ -28,8 +30,7 @@ public class Template
      *
      * @return long
      */
-    public long getTemplateID()
-    {
+    public long getTemplateID() {
         return templateID;
     }
 
@@ -38,8 +39,7 @@ public class Template
      *
      * @param templateID
      */
-    public void setTemplateID(long templateID)
-    {
+    public void setTemplateID(long templateID) {
         this.templateID = templateID;
     }
 
@@ -48,8 +48,7 @@ public class Template
      *
      * @return String
      */
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
@@ -58,8 +57,7 @@ public class Template
      *
      * @param name
      */
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -68,8 +66,7 @@ public class Template
      *
      * @return String
      */
-    public String getUid()
-    {
+    public String getUid() {
         return uid;
     }
 
@@ -78,9 +75,20 @@ public class Template
      *
      * @param uid
      */
-    public void setUid(String uid)
-    {
+    public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public ArrayList<Target> getTargets() {
+        return targets;
+    }
+
+    public void setTargets(ArrayList<Target> targets) {
+        this.targets = targets;
+    }
+
+    public void addTarget(Target target) {
+        this.targets.add(target);
     }
 
     /**
@@ -89,36 +97,29 @@ public class Template
      * @param _other
      * @return boolean
      */
-    public boolean equals(Object _other)
-    {
-        if (_other == null)
-        {
+    public boolean equals(Object _other) {
+        if (_other == null) {
             return false;
         }
 
-        if (_other == this)
-        {
+        if (_other == this) {
             return true;
         }
 
-        if (!(_other instanceof Template))
-        {
+        if (!(_other instanceof Template)) {
             return false;
         }
 
         final Template _cast = (Template) _other;
-        if (templateID != _cast.templateID)
-        {
+        if (templateID != _cast.templateID) {
             return false;
         }
 
-        if (name == null ? _cast.name != name : !name.equals(_cast.name))
-        {
+        if (name == null ? _cast.name != name : !name.equals(_cast.name)) {
             return false;
         }
 
-        if (uid == null ? _cast.uid != uid : !uid.equals(_cast.uid))
-        {
+        if (uid == null ? _cast.uid != uid : !uid.equals(_cast.uid)) {
             return false;
         }
 
@@ -130,8 +131,7 @@ public class Template
      *
      * @return String
      */
-    public String toString()
-    {
+    public String toString() {
         StringBuffer ret = new StringBuffer();
         ret.append("dbtcard.dto.CTemplate: ");
         ret.append("templateID=" + templateID);
