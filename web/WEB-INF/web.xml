@@ -25,7 +25,7 @@
     <welcome-file-list>
         <welcome-file>index.vm</welcome-file>
     </welcome-file-list>
-    <!--security-role>
+    <security-role>
         <description>A user</description>
         <role-name>user</role-name>
     </security-role>
@@ -53,7 +53,7 @@
             <form-login-page>/login.vm</form-login-page>
             <form-error-page>/loginerror.vm</form-error-page>
         </form-login-config>
-    </login-config-->
+    </login-config>
     <session-config>
         <session-timeout>
             30

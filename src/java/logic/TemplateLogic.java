@@ -10,10 +10,7 @@ import org.vraptor.annotations.Remotable;
 
 @Component("template")
 public class TemplateLogic
-{    
-    /*@Out
-    private Template template;*/
-    
+{        
     @Out
     private ArrayList<Target> feelings, thoughts, behaviors;
     
@@ -55,17 +52,4 @@ public class TemplateLogic
         
         targets = db.findAll();
     }
-    
-    /*public void create(Template t)
-    {
-        t.setUid("erumppe");
-        
-        TemplateDB db = new TemplateDB();
-        template = db.insert(t);
-    }
-    
-    public void addTargets(Target target)
-    {
-        TargetDB db = new TargetDB();
-    }*/
 }
