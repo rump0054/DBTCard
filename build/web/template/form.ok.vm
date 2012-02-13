@@ -44,7 +44,7 @@ and submitting the form.</p>
             <tr>
                 <td>$f.target</td>
                 <td align="right">
-                    <input type="checkbox" name="id" value="$f.targetID" />
+                    <input type="checkbox" name="ids" value="$f.targetID" />
                 </td>
             </tr>
             #end
