@@ -1,6 +1,5 @@
 package logic;
 
-
 import org.vraptor.annotations.Component;
 import org.vraptor.annotations.Out;
 import data.TargetDB;
@@ -10,12 +9,15 @@ import entities.Target;
 import entities.Template;
 import entities.TemplateTarget;
 import java.util.ArrayList;
-import org.vraptor.annotations.Parameter;
-import org.vraptor.annotations.Remotable;
+import javax.servlet.http.HttpServletRequest;
+import org.vraptor.annotations.*;
 
 @Component("template")
 public class TemplateLogic
 {
+    @In
+    private HttpServletRequest request;
+    
     @Parameter(key="ids")
     private Long[] ids;
     
@@ -35,11 +37,11 @@ public class TemplateLogic
     private ArrayList<Target> targets;
     
     @Out
-    private Template template;
+    private long templateID;
     
     public void form()
     {
-        String username = "erumppe";
+        String username = request.getRemoteUser();
         
         TargetDB db = new TargetDB();
         feelings = new ArrayList<Target>();
@@ -55,7 +57,7 @@ public class TemplateLogic
     @Remotable
     public void addtarget()
     {
-        String username = "erumppe";
+        String username = request.getRemoteUser();
         
         target = new Target();
         target.setCategoryID(cID);
@@ -66,13 +68,12 @@ public class TemplateLogic
         
         TargetDB db = new TargetDB();
         target = db.insert(target);
-        
-        System.out.println(cID + " " + targetName);
     }
     
     public void create()
     {
-        String username = "erumppe";
+        String username = request.getRemoteUser();
+        
         feelings = new ArrayList<Target>();
         thoughts = new ArrayList<Target>();
         behaviors = new ArrayList<Target>();
@@ -81,7 +82,7 @@ public class TemplateLogic
         TargetDB targDB = new TargetDB();
         TemplateTargetDB ttDB = new TemplateTargetDB();
         
-        template = new Template();
+        Template template = new Template();
         template.setUid(username);  
         template.setName(cardname);
         template = tempDB.insert(template);
@@ -106,5 +107,7 @@ public class TemplateLogic
             
             tt = ttDB.insert(tt);
         }
+        
+        templateID = template.getTemplateID();
     }
 }
