@@ -5,10 +5,46 @@ body {
 }
 
 #wrapper {
-    margin: 10px auto 0 auto;
+    margin: 10 auto 0 auto;
     width: 800px;
+}
+
+#mask {
+    background-color: #000000;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 9000;
+    display: none;
+}
+
+#boxes .window {
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    /*width: 225px;
+    height: 300px;*/
+    z-index: 9999;
+    padding: 20px;
+}
+
+#boxes #dialog {
+    width: 245px;
+    /*height: 303px;*/
+    padding: 10px;
+    background-color: #ffffff;
 }
 
 table {
     font-size: 1em;
+}
+
+.show {
+    display: block;
+}
+
+.message {
+    margin-left: 20px;
+    color: red;
 }

@@ -20,7 +20,13 @@ public class TemplateLogic
     private Long[] ids;
     
     @Parameter
-    private String cardname;
+    private long cID;
+    
+    @Parameter
+    private String cardname, targetName, targetDesc, range; 
+    
+    @Out
+    private Target target;
     
     @Out
     private ArrayList<Target> feelings, thoughts, behaviors;
@@ -47,21 +53,21 @@ public class TemplateLogic
     }
  
     @Remotable
-    public void targets()
+    public void addtarget()
     {
         String username = "erumppe";
         
+        target = new Target();
+        target.setCategoryID(cID);
+        target.setTarget(targetName);
+        target.setDescription(targetDesc);
+        target.setRangeMax(range);
+        target.setUsername(username);
+        
         TargetDB db = new TargetDB();
-        //targets = new ArrayList<ArrayList<Target>>();
-        feelings = new ArrayList<Target>();
-        thoughts = new ArrayList<Target>();
-        behaviors = new ArrayList<Target>();
+        target = db.insert(target);
         
-        feelings = db.getTargetsByCategory(7, username);
-        thoughts = db.getTargetsByCategory(6, username);
-        behaviors = db.getTargetsByCategory(5, username);
-        
-        targets = db.findAll();
+        System.out.println(cID + " " + targetName);
     }
     
     public void create()
