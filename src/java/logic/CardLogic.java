@@ -1,33 +1,44 @@
 package logic;
 
-import data.TargetDB;
-import data.TemplateDB;
-import entities.Template;
-import entities.Target;
+import data.CardDB;
 import java.util.ArrayList;
+import java.util.Date;
+import javax.servlet.http.HttpServletRequest;
 import org.vraptor.annotations.Component;
+import org.vraptor.annotations.In;
 import org.vraptor.annotations.Out;
-import org.vraptor.annotations.Parameter;
+import utils.DateUtils;
 
 @Component("card")
 public class CardLogic
 {    
-    @Parameter
-    private long templateID;
+    @In
+    private HttpServletRequest request;
     
     @Out
-    private Template template;
+    private ArrayList<String> dates;
+    
+    public String check()
+    {
+        String template = "";
+        String username = request.getRemoteUser();
+        long weekStart = DateUtils.getWeekStart();
+        
+        if (CardDB.hasCard(username, weekStart))
+        {
+            template="ok";
+        }
+        else
+        {
+            template="no";
+        }
+        
+        return template;        
+    }
     
     public void generate()
     {
-        ArrayList<Target> targets = new ArrayList<Target>();
-        TemplateDB tempDB = new TemplateDB();
-        TargetDB targDB = new TargetDB();
-        
-        template = new Template();
-        template = tempDB.findByPrimaryKey(templateID);
-        
-        //targets = targDB.
-        
+        dates = new ArrayList<String>();
+        dates = DateUtils.getWeekDays();
     }
 }

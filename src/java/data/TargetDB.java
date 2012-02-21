@@ -184,8 +184,8 @@ public class TargetDB {
      * 'categoryID = :categoryID'.
      */
     public ArrayList<Target> getTargetsByCategory(long categoryID, String owner) {
-        return findByDynamicSelect(SQL_SELECT + " WHERE categoryID = ? AND (username = ? OR username = ?) ORDER BY target ASC",
-                new Object[]{new Long(categoryID), owner, "system"});
+        return findByDynamicSelect(SQL_SELECT + " WHERE categoryID = ? AND username = ? ORDER BY target ASC",
+                new Object[]{new Long(categoryID), owner});
     }
     
     /**

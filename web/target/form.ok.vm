@@ -1,0 +1,123 @@
+<html>
+<head>
+<title>Create Template</title>
+<link type="text/css" href="css/start/jquery-ui-1.8.17.custom.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="css/dbtcard.css"/>	
+
+<script type="text/javascript" src="scripts/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="scripts/jquery-ui-1.8.17.custom.min.js"></script>
+<script type="text/javascript" src="scripts/template-interface.js"></script>
+</head>
+<body>
+<form method="post" action="template.create.logic" id="frmTemplate">
+#set( $feelings = $targets.get(0) )
+#set( $thoughts = $targets.get(1) )
+#set( $behaviors = $targets.get(2) )
+<div id="wrapper">
+<div style="width:400px; margin:0 auto">
+<h1>Diary Card Template</h1>
+<p style="width:400px">Please use the options below to create a diary card template.
+You can add additional targets to each group by clicking the "Add Target" link 
+and submitting the form.</p>
+    <div id="accordion" style="width:400px">
+        <h3><a href="${esc.h}section1">Feelings</a></h3>
+        <div>
+            <span style="float:right">
+                <a href="${esc.h}dialog" name="modal" id="7">Add target feeling</a>
+            </span>
+            <table border="0" cellpadding="3" cellspacing="3" width="100%" id="tblF">
+            #foreach( $f in $feelings )
+            <tr>
+                <td>$f.target</td>
+                <td align="right">
+                    <input type="checkbox" name="ids" value="$f.targetID" />
+                </td>
+            </tr>
+            #end
+            </table>
+        </div>
+   
+        <h3><a href="${esc.h}section2">Thoughts</a></h3>
+        <div>
+            <span style="float:right">
+                <a href="${esc.h}dialog" name="modal" id="6">Add target thought</a>
+            </span>
+            <table border="0" cellpadding="3" cellspacing="3" width="100%" id="tblT">
+            #foreach( $t in $thoughts )
+            <tr>
+                <td>$t.target</td>
+                <td align="right">
+                    <input type="checkbox" name="ids" value="$t.targetID" />
+                </td>
+            </tr>
+            #end
+            </table>
+        </div>
+
+        <h3><a href="${esc.h}section3">Behaviors</a></h3>
+            <div>
+            <span style="float:right">
+                <a href="${esc.h}dialog" name="modal" id="5">Add target behavior</a>
+            </span>
+            <table border="0" cellpadding="3" cellspacing="3" width="100%" id="tblB">
+            #foreach( $b in $behaviors )
+            <tr>
+                <td>$b.target</td>
+                <td align="right">
+                    <input type="checkbox" name="ids" value="$b.targetID" />
+                </td>
+            </tr>
+            #end
+            </table>
+        </div>
+</div>
+<table border="0" cellpadding="3" cellspacing="3" width="400px">
+    <tr>
+        <td colspan="2" align="right">
+            <input type="submit" value="Save"/>
+        </td>
+    </tr>
+</table>
+</div>
+</form>
+
+<div id="boxes">
+    <div id="dialog" class="window">
+    <form action="target.addtarget.ajax.logic" id="targetForm">
+    <center>
+    <h2 id="title" style="margin-top:0">Add New Target</h2>
+    </center>
+    <input type="hidden" name="categoryID" id="catID" value=""/>
+    <table border="0" cellspacing="3" cellpadding="3">
+    <tr>
+        <td><label>Target:</label></td>
+        <td><input type="text" name="targetName" id="targName" value=""/></td>
+    </tr>
+    <tr>
+        <td valign="top"><label>Description:</label></td>
+        <td>
+            <textarea name="targetDesc" id="targDesc" rows="5" cols="17"></textarea>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top"><label>Range:</label></td>
+        <td>
+            <input type="radio" name="rangeMax" value="0-5" />0-5
+            <input type="radio" name="rangeMax" value="Y/N" />Y/N
+            <input type="radio" name="rangeMax" value="count" />Count
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" align="right">
+            <input type="button" value="Add" class="add"/>
+            <span style="margin-left: 3px"></span>
+            <input type="button" value="Cancel" class="close"/>
+        </td>
+    </tr>
+    </table>
+    </form>
+    </div>
+</div>
+<div id="mask"></div>
+</body>
+</html>

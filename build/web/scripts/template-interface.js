@@ -54,7 +54,7 @@ $(document).ready(function() {
     $('.window .add').click(function(e) {
         e.preventDefault();
         
-        var url = 'template.addtarget.ajax.logic';
+        var url = 'target.addtarget.ajax.logic';
         var inp = 'cID=' + $('#catID').val() + "&";
         inp += 'targetName=' + $('#targName').val() + "&";
         inp += 'targetDesc=' + $('#targDesc').val() + "&";

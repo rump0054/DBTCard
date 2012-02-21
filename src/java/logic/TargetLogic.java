@@ -4,40 +4,58 @@ import java.util.ArrayList;
 
 import org.vraptor.annotations.Component;
 import org.vraptor.annotations.Out;
-import org.vraptor.annotations.Parameter;
-import org.vraptor.annotations.Remotable;
 
 import data.TargetDB;
 import entities.Target;
+import javax.servlet.http.HttpServletRequest;
+import org.vraptor.annotations.*;
 
 @Component("target")
 public class TargetLogic
 {
+    @In
+    private HttpServletRequest request;
+    
     @Out
     private Target target;
     
     @Out
-    private ArrayList<Target> targets;
-    
-
-    public void feelings()
+    private ArrayList<Target> feelings, thoughts, behaviors;
+ 
+    public void form()
     {
+        String username = request.getRemoteUser();
+        
         TargetDB db = new TargetDB();
-        targets = new ArrayList<Target>();
-        targets = db.getTargetsByCategory(7);
+        feelings = new ArrayList<Target>();
+        thoughts = new ArrayList<Target>();
+        behaviors = new ArrayList<Target>();
+        
+        feelings = db.getTargetsByCategory(7, username);
+        thoughts = db.getTargetsByCategory(6, username);
+        behaviors = db.getTargetsByCategory(5, username);
+        
     }
+ 
+    @Parameter
+    private long cID;
     
-    /*public void thoughts()
+    @Parameter
+    private String targetName, targetDesc, range; 
+    
+    @Remotable
+    public void addtarget()
     {
+        String username = request.getRemoteUser();
+        
+        target = new Target();
+        target.setCategoryID(cID);
+        target.setTarget(targetName);
+        target.setDescription(targetDesc);
+        target.setRangeMax(range);
+        target.setUsername(username);
+        
         TargetDB db = new TargetDB();
-        targets = new ArrayList<Target>();
-        targets = db.getTargetsByCategory(6);
+        target = db.insert(target);
     }
-    
-    public void behaviors()
-    {
-        TargetDB db = new TargetDB();
-        targets = new ArrayList<Target>();
-        targets = db.getTargetsByCategory(5);
-    }*/
 }
